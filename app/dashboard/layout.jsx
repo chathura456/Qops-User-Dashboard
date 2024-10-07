@@ -1,6 +1,7 @@
-import styles from '../ui/dashobard/dashboard.module.css'
-import Navbar from '../ui/dashobard/navbar/navbar'
-import Sidebar from '../ui/dashobard/sidebar/sidebar'
+import styles from '../ui/dashobard/dashboard.module.css';
+import Navbar from '../ui/dashobard/navbar/navbar';
+import Sidebar from '../ui/dashobard/sidebar/sidebar';
+import "../ui/globals.css";
 
 const Layout = ({children}) => {
   return (
