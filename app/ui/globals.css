@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+    --bg:#ffffff;
+    --bgSoft:#01133a;
+    --text:white;
+    --textSoft:#ebeef5;
+    --bgHover:#000818c0;
+    --bgPending: #f7cb7375;
+    --bgDone:#afd6ee75;
+    --bgCancelled:#f7737575;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background-color:var(--bg);
+    color:var(--text);
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
