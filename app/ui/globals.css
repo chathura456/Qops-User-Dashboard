@@ -3,14 +3,15 @@
 @tailwind utilities;
 
 :root{
-    --bg:#ffffff;
-    --bgSoft:#01133a;
-    --text:white;
-    --textSoft:#ebeef5;
-    --bgHover:#000818c0;
+    --bg: linear-gradient(to right, #6b6b6d, #d1d1d1);
+    --bgSoft:white;
+    --text:black;
+    --textSoft:#020713;
+    --bgHover:linear-gradient(to bottom, #2B59CE, #bfd2fa);
     --bgPending: #f7cb7375;
     --bgDone:#afd6ee75;
     --bgCancelled:#f7737575;
+    --textBlue:black;
 }
 
 *{
@@ -20,7 +21,7 @@
 }
 
 body{
-    background-color:var(--bg);
+    background: var(--bg);
     color:var(--text);
 }
 

@@ -1,26 +1,27 @@
 
 
 import {
-  MdAdminPanelSettings,
-  MdAttachMoney,
-  MdBikeScooter,
+  MdBookmarks,
   MdDashboard,
-  MdLocalShipping,
-  MdLocalTaxi,
+  MdDateRange,
+  MdHelp,
+  MdLibraryBooks,
   MdLogout,
-  MdOutlineAttachMoney,
-  MdOutlineSettings,
-  MdPeople
+  MdMessage,
+  MdStars,
+  MdTask,
+  MdWorkHistory,
+  MdWorkspacePremium
 } from "react-icons/md"; // Ensure react-icons is installed
 
 import MenuLink from "@/app/ui/dashobard/sidebar/menuLink/menuLink";
 import Image from "next/image";
 import styles from "./sidebar.module.css";
-import avatar from "/public/avatar.jpg";
+import logo from "/public/logo.png";
 
 const menuItems = [
   {
-    title: "Pages",
+    title: "",
     list: [
       {
         title: "Dashboard",
@@ -28,49 +29,54 @@ const menuItems = [
         icon: <MdDashboard />,
       },
       {
-        title: "Customers",
-        path: "/dashboard/customers",
-        icon: <MdPeople />,
+        title: "Calender",
+        path: "/dashboard/calender",
+        icon: <MdDateRange />,
       },
       {
-        title: "Riders",
-        path: "/dashboard/riders",
-        icon: <MdBikeScooter />,
+        title: "Library",
+        path: "/dashboard/library",
+        icon: <MdLibraryBooks />,
       },
       {
-        title: "Taxi Bookings",
-        path: "/dashboard/taxi_bookings",
-        icon: <MdLocalTaxi />,
+        title: "Courses",
+        path: "/dashboard/courses",
+        icon: <MdBookmarks/>,
       },
       {
-        title: "Package Delivery",
-        path: "/dashboard/package_delivery",
-        icon: <MdLocalShipping />,
+        title: "Assignments",
+        path: "/dashboard/assignments",
+        icon: <MdTask />,
       },
       {
-        title: "Charges",
-        path: "/dashboard/charges",
-        icon: <MdAttachMoney />,
+        title: "Connect",
+        path: "/dashboard/connect",
+        icon: <MdMessage />,
       },
       {
-        title: "Transactions",
-        path: "/dashboard/transactions",
-        icon: <MdOutlineAttachMoney />,
+        title: "Achievements",
+        path: "/dashboard/achievements",
+        icon: <MdWorkspacePremium />,
+      },
+      {
+        title: "Pathways",
+        path: "/dashboard/pathways",
+        icon: <MdWorkHistory />,
       },
     ],
   },
   {
-    title: "UserSettings",
+    title: "",
     list: [
       {
-        title: "Admin Users",
-        path: "/dashboard/admin_users",
-        icon: <MdAdminPanelSettings />,
+        title: "Upgrade to Premium",
+        path: "/dashboard/premium",
+        icon: <MdStars />,
       },
       {
-        title: "Settings",
-        path: "/dashboard/settings",
-        icon: <MdOutlineSettings />,
+        title: "Help",
+        path: "/dashboard/help",
+        icon: <MdHelp />,
       },
     ],
   },
@@ -80,16 +86,12 @@ const Sidebar = () => {
   return (
     <div className={styles.container}>
     <div className={styles.user}>
-      <Image className={styles.userImage} src={avatar} alt="" width="50" height="50"/>
-      <div className={styles.userDetails}>
-        <span className={styles.userName}>John Doe</span>
-        <span className={styles.userRole}>Administrator</span>
-      </div>
+      <Image src={logo} alt="" width="200" />
     </div>
       <ul className={styles.list}>
         {menuItems.map((cat) => (
           <li key={cat.title}>
-            <span className={styles.cat}>{cat.title}</span>
+
             {cat.list.map((item) => (
           
               <MenuLink item={item} key={item.title}/>
@@ -97,6 +99,7 @@ const Sidebar = () => {
           </li>
         ))}
       </ul>
+      <hr/>
       <button className={styles.logout}>
        <MdLogout />
        Logout

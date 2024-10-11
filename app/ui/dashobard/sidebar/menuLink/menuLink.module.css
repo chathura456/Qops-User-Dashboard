@@ -8,5 +8,5 @@
 }
 
 .container:hover, .active{
-    background-color: var(--bgHover);
+    background: var(--bgHover);
 }

@@ -1,4 +1,5 @@
 "use client"
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import {
   MdNotifications,
@@ -7,6 +8,7 @@ import {
   MdSearch
 } from "react-icons/md";
 import styles from './navbar.module.css';
+import avatar from "/public/avatar.jpg";
 
 const Navbar = () => {
   
@@ -25,6 +27,13 @@ const Navbar = () => {
           <MdNotifications size={20}/>
           <MdPublic size={20}/>
         </div>
+        <div className={styles.user}>
+      <Image className={styles.userImage} src={avatar} alt="" width="50" height="50"/>
+      <div className={styles.userDetails}>
+        <span className={styles.userName}>Swetha Shankaresh</span>
+        <span className={styles.userRole}>student</span>
+      </div>
+    </div>
       </div>
     </div>
   )

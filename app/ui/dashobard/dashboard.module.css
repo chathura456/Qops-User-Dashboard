@@ -8,9 +8,15 @@
   padding: 20px;
 }
 
+.navbar{
+  flex: 4;
+  padding: 0;
+}
+
 .content {
   flex: 4;
   padding: 20px;
+  padding-top: 0px;
 }
 
 .wrapper {

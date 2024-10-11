@@ -9,9 +9,11 @@ const Layout = ({children}) => {
       <div className={styles.menu}>
         <Sidebar/>
       </div>
-      <div className={styles.content}>
+      <div className={styles.navbar}>
         <Navbar/>
+        <div className={styles.content}>
         {children}
+        </div>
       </div>
     </div>
   )
