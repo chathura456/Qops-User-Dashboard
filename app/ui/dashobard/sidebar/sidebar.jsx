@@ -1,5 +1,4 @@
-
-
+"use client"
 import {
   MdBookmarks,
   MdDashboard,
@@ -11,11 +10,12 @@ import {
   MdStars,
   MdTask,
   MdWorkHistory,
-  MdWorkspacePremium
+  MdWorkspacePremium,
 } from "react-icons/md"; // Ensure react-icons is installed
 
 import MenuLink from "@/app/ui/dashobard/sidebar/menuLink/menuLink";
 import Image from "next/image";
+import { useState } from "react";
 import styles from "./sidebar.module.css";
 import logo from "/public/logo.png";
 
@@ -41,7 +41,7 @@ const menuItems = [
       {
         title: "Courses",
         path: "/dashboard/courses",
-        icon: <MdBookmarks/>,
+        icon: <MdBookmarks />,
       },
       {
         title: "Assignments",
@@ -83,27 +83,65 @@ const menuItems = [
 ];
 
 const Sidebar = () => {
+  const [showConfirm, setShowConfirm] = useState(false); // New state for showing the confirmation dialog
+
+  // Function to handle logout
+  const handleLogout = () => {
+    setShowConfirm(true); // Show the confirm dialog when logout is clicked
+  };
+
+  // Function to handle confirmation (Yes/No)
+  const confirmLogout = (confirm) => {
+    if (confirm) {
+      // Perform the actual logout logic here
+      console.log("User logged out"); // Replace this with actual logout logic (e.g., calling logout function)
+      // Redirect to login or home page after logging out
+      window.location.href = "/";
+    } else {
+      setShowConfirm(false); // Hide the confirm dialog if user cancels
+    }
+  };
+
   return (
     <div className={styles.container}>
-    <div className={styles.user}>
-      <Image src={logo} alt="" width="200" />
-    </div>
+      <div className={styles.user}>
+        <Image src={logo} alt="" width="200" />
+      </div>
       <ul className={styles.list}>
         {menuItems.map((cat) => (
           <li key={cat.title}>
-
             {cat.list.map((item) => (
-          
-              <MenuLink item={item} key={item.title}/>
+              <MenuLink item={item} key={item.title} />
             ))}
           </li>
         ))}
       </ul>
-      <hr/>
-      <button className={styles.logout}>
-       <MdLogout />
-       Logout
+      <hr />
+      <button className={styles.logout} onClick={handleLogout}>
+        <MdLogout />
+        Logout
       </button>
+
+      {showConfirm && (
+        <div className={styles.confirmDialog}>
+          {/* Simple Confirm Dialog */}
+          <p>Are you sure you want to logout?</p>
+          <div className={styles.confirmButtons}>
+            <button
+              className={styles.confirmYes}
+              onClick={() => confirmLogout(true)}
+            >
+              Yes
+            </button>
+            <button
+              className={styles.confirmNo}
+              onClick={() => confirmLogout(false)}
+            >
+              No
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

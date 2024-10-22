@@ -39,3 +39,40 @@
   .logout:hover{
     background: var(--bgHover);
   }
+
+  .confirmDialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 50px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    z-index: 9999;
+  }
+  
+  .confirmButtons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 25px;
+  }
+  
+  .confirmYes {
+    background-color: #4caf50;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .confirmNo {
+    background-color: #f44336;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
