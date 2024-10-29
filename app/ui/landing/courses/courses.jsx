@@ -10,6 +10,7 @@ import {
 } from "react-icons/md";
 import Image from "next/image";
 import QAOps from "/public/QAOps.png";
+import Link from "next/link";
 
 const Courses = () => {
   return (
@@ -27,9 +28,12 @@ const Courses = () => {
             </div>
           </div>
           <div className="flex items-center flex-wrap">
-            <button className="bg-blue-600 text-white py-2 px-6 lg:px-10 font-bold hover:bg-blue-700 transition w-1/4">
+            <Link
+              href="../../../login"
+              className="bg-blue-600 text-white py-2 px-6 lg:px-10 font-bold hover:bg-blue-700 transition w-1/4 rounded-lg text-center"
+            >
               Start
-            </button>
+            </Link>
             <div className="ml-4 lg:ml-6 text-gray-500 text-xs lg:text-sm">
               466,834 learners enrolled
             </div>
