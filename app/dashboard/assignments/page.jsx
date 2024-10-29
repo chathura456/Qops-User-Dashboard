@@ -1,39 +1,60 @@
 "use client";
-
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const Assignments = () => {
-  // Updated assignments data related to the courses
+  const router = useRouter();
+
+  // Sample assignments data with two completed assignments for "Containerization with Docker"
   const assignments = [
-    { id: 1, courseName: "Kubernetes for Beginners", chapter: "Chapter 1", assignmentName: "Setup Kubernetes", duration: "2 hours", startDate: "2024-10-01", status: "ongoing" },
-    { id: 2, courseName: "Containerization with Docker", chapter: "Chapter 2", assignmentName: "Install Docker", duration: "3 hours", startDate: "2024-09-15", status: "pending" },
-    { id: 3, courseName: "Kubernetes for Beginners", chapter: "Chapter 3", assignmentName: "Deploy a Pod", duration: "4 hours", startDate: "2024-10-05", status: "ongoing" },
-    { id: 4, courseName: "Containerization with Docker", chapter: "Chapter 1", assignmentName: "Build a Container", duration: "5 hours", startDate: "2024-09-20", status: "pending" },
-    { id: 5, courseName: "CI/CD with Jenkins", chapter: "Chapter 4", assignmentName: "Create Jenkins Pipeline", duration: "3 hours", startDate: "2024-09-30", status: "ongoing" },
-    { id: 6, courseName: "Kubernetes for Beginners", chapter: "Chapter 4", assignmentName: "Manage Cluster Nodes", duration: "2.5 hours", startDate: "2024-09-25", status: "pending" },
-    { id: 7, courseName: "Containerization with Docker", chapter: "Chapter 3", assignmentName: "Optimize Docker Image", duration: "2 hours", startDate: "2024-10-10", status: "ongoing" },
-    { id: 8, courseName: "CI/CD with Jenkins", chapter: "Chapter 2", assignmentName: "Install Jenkins", duration: "1.5 hours", startDate: "2024-09-28", status: "pending" },
-];
+    { id: 1, courseName: "DevOps for Beginners", chapter: "Chapter 1", duration: "2 hours", startDate: "2024-10-01", points: 150 },
+    { id: 2, courseName: "Containerization with Docker", chapter: "Chapter 2", duration: "3 hours", startDate: "2024-09-15", status: "completed", points: 200 },
+    { id: 3, courseName: "Containerization with Docker", chapter: "Chapter 3", duration: "2.5 hours", startDate: "2024-09-20", status: "completed", points: 150 }
+  ];
 
   const [activeTab, setActiveTab] = useState("all");
+  const [displayedAssignments, setDisplayedAssignments] = useState([]);
 
-  // Filter assignments based on the selected tab
+  useEffect(() => {
+    const devOpsStatus = localStorage.getItem("assignment");
+
+    const updatedAssignments = assignments.map((assignment) => {
+      if (assignment.courseName === "DevOps for Beginners" && devOpsStatus) {
+        assignment.status = devOpsStatus;
+      }
+      return assignment;
+    });
+
+    setDisplayedAssignments(
+      updatedAssignments.filter((assignment) => 
+        assignment.courseName !== "DevOps for Beginners" || devOpsStatus
+      )
+    );
+  }, []);
+
   const filteredAssignments = () => {
     switch (activeTab) {
       case "ongoing":
-        return assignments.filter((assignment) => assignment.status === "ongoing");
+        return displayedAssignments.filter((assignment) => assignment.status === "ongoing");
       case "pending":
-        return assignments.filter((assignment) => assignment.status === "pending");
+        return displayedAssignments.filter((assignment) => assignment.status === "pending");
       case "completed":
-        return assignments.filter((assignment) => assignment.status === "completed"); // Assuming completed status
+        return displayedAssignments.filter((assignment) => assignment.status === "completed");
       default:
-        return assignments; // All assignments
+        return displayedAssignments;
+    }
+  };
+
+  const handleActionClick = (assignment) => {
+    if (assignment.status === "pending" || assignment.status === "ongoing") {
+      router.push("/dashboard/assignments/content");
+    } else if (assignment.status === "completed") {
+      router.push(`/dashboard/achievements`);
     }
   };
 
   return (
     <div className="bg-white p-5 rounded-lg shadow-md w-full">
-
       {/* Tabs for filtering assignments */}
       <div className="mb-4 flex space-x-4">
         <button
@@ -66,15 +87,38 @@ const Assignments = () => {
       <div className="min-h-96 overflow-y-auto">
         {filteredAssignments().map((assignment) => (
           <div key={assignment.id} className="flex justify-between items-center p-4 mb-2 bg-gray-100 rounded-lg">
-            <div className="w-1/3">
+            <div className="w-1/4">
               {assignment.courseName}
               <div className="text-sm text-gray-600">{assignment.chapter}</div>
             </div>
-            <div className="w-1/4">{assignment.assignmentName}</div>
-            <div className="w-1/4">{assignment.duration}</div>
-            <div className="w-1/4">{assignment.startDate}</div>
-            <div className={`font-semibold ${assignment.status === 'ongoing' ? 'text-green-500' : assignment.status === 'pending' ? 'text-orange-500' : 'text-gray-500'}`}>
-              {assignment.status}
+            <div className="w-1/6">{assignment.duration}</div>
+            <div className="w-1/6">{assignment.startDate}</div>
+            <div className="w-1/6">
+              {assignment.status === "completed" ? (
+                <span className="text-blue-600 font-semibold">{`Points: ${assignment.points}`}</span>
+              ) : (
+                <span className="text-gray-500">-</span>
+              )}
+            </div>
+            <div className="w-1/6 font-semibold text-gray-700">
+              {assignment.status ? (
+                <span className={`${assignment.status === "completed" ? "text-green-500" : assignment.status === "ongoing" ? "text-blue-500" : "text-orange-500"}`}>
+                  {assignment.status}
+                </span>
+              ) : (
+                "-"
+              )}
+            </div>
+            <div className="w-1/6">
+              <button
+                onClick={() => handleActionClick(assignment)}
+                className={`py-1 px-3 rounded-lg ${
+                  assignment.status === "completed" ? "bg-gray-300 text-gray-700" :
+                  assignment.status === "ongoing" ? "bg-blue-500 text-white" : "bg-orange-500 text-white"
+                }`}
+              >
+                {assignment.status === "completed" ? "View" : assignment.status === "ongoing" ? "Continue" : "Start"}
+              </button>
             </div>
           </div>
         ))}

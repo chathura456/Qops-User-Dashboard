@@ -120,9 +120,12 @@ const Courses = () => {
                 />
               </div>
               {course.category === "starter" ? (
+                <div className="mt-4">
                 <Link href="/dashboard/courses/chapters" className="w-full mt-4 bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">
                   Enroll Now
                 </Link>
+                </div>
+               
               ) : (
                 <button className="w-full mt-4 bg-gray-300 text-gray-500 py-2 rounded-lg cursor-not-allowed">
                   Locked
