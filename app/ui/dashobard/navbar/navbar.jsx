@@ -11,6 +11,7 @@ import {
 } from "react-icons/md";
 import styles from "./navbar.module.css";
 import avatar from "/public/avatar.jpg";
+import icon from "/public/menu.png";
 
 const devOpsTerms = [
   "Kubernetes",

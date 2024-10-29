@@ -151,7 +151,7 @@ const Calendar = () => {
           {daysInMonth.map((day, index) => {
             const eventForDay =
               day &&
-              events.find(
+              events?.find(
                 (event) =>
                   new Date(event.date).toDateString() === day.toDateString()
               );
@@ -172,7 +172,7 @@ const Calendar = () => {
                       {day.getDate()}
                     </p>
                     {eventForDay && (
-                      <p className="absolute inset-0 flex justify-center items-center text-md  text-gray-600  text-center">
+                      <p className="absolute inset-0 flex justify-center items-center text-sm  text-gray-600  text-center">
                         {eventForDay.name}
                       </p>
                     )}
