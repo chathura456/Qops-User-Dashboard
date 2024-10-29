@@ -1,78 +1,77 @@
 .container {
-    position: sticky;
-    font-weight: 500;
-    height: 100vh;
-  }
-  
-  .user{
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 20px;
-  }
+  position: sticky;
+  font-weight: 500;
+  height: 100vh;
+}
 
-  .list{
-    list-style: none;
-    color: var(--textBlue);
-  }
+.user {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
 
-  .cat{
-    color: var(--textSoft);
-    font-size: 13px;
-    font-weight: bold;
-    margin: 10px 0px;
-  }
+.list {
+  list-style: none;
+  color: var(--textBlue);
+}
 
-  .logout{
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 5px 0px;
-    border-radius: 10px;
-    background: none;
-    border: none;
-    color:var(--text);
-    width: 100%;
-  }
+.cat {
+  color: var(--bgSoft);
+  font-size: 13px;
+  font-weight: bold;
+  margin: 10px 0px;
+}
 
-  .logout:hover{
-    background: var(--bgHover);
-  }
+.logout {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 5px 0px;
+  border-radius: 10px;
+  background: none;
+  border: none;
+  color: var(--text);
+  width: 100%;
+}
 
-  .confirmDialog {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    padding: 50px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    border-radius: 8px;
-    z-index: 9999;
-  }
-  
-  .confirmButtons {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 25px;
-  }
-  
-  .confirmYes {
-    background-color: #4caf50;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  
-  .confirmNo {
-    background-color: #f44336;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  
+.logout:hover {
+  background: var(--bgHover);
+}
+
+.confirmDialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 50px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  z-index: 9999;
+}
+
+.confirmButtons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 25px;
+}
+
+.confirmYes {
+  background-color: #4caf50;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.confirmNo {
+  background-color: #f44336;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}

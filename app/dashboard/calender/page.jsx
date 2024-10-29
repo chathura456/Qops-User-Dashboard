@@ -1,6 +1,7 @@
 "use client";
-import AuthContext from '@/app/context/AuthContext';
-import { useContext, useEffect, useState } from 'react';
+import AuthContext from "@/app/context/AuthContext";
+import { useContext, useEffect, useState } from "react";
+import Image from "next/image";
 
 const Calendar = () => {
   const { user } = useContext(AuthContext);
@@ -13,7 +14,7 @@ const Calendar = () => {
 
   useEffect(() => {
     // Fetch event data from API
-    fetch('http://localhost:4000/events/')
+    fetch("http://localhost:4000/events/")
       .then((response) => response.json())
       .then((data) => setEvents(data.events));
   }, []);
@@ -35,14 +36,19 @@ const Calendar = () => {
     return days;
   };
 
-  const daysInMonth = getDaysInMonth(currentDate.getFullYear(), currentDate.getMonth());
+  const daysInMonth = getDaysInMonth(
+    currentDate.getFullYear(),
+    currentDate.getMonth()
+  );
 
   const handleClick = (event) => {
     setSelectedEvent(event);
   };
 
   const handleMonthChange = (direction) => {
-    setCurrentDate(new Date(currentDate.setMonth(currentDate.getMonth() + direction)));
+    setCurrentDate(
+      new Date(currentDate.setMonth(currentDate.getMonth() + direction))
+    );
   };
 
   const handleParticipation = (eventId) => {
@@ -52,13 +58,15 @@ const Calendar = () => {
 
   const confirmParticipation = () => {
     fetch(`http://localhost:4000/events/${eventToRegister}/participate`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ userId: user._id }),
     }).then((response) => {
       if (response.ok) {
         const updatedEvents = events.map((event) =>
-          event._id === eventToRegister ? { ...event, participations: [...event.participations, user._id] } : event
+          event._id === eventToRegister
+            ? { ...event, participations: [...event.participations, user._id] }
+            : event
         );
         setEvents(updatedEvents);
 
@@ -71,7 +79,7 @@ const Calendar = () => {
           setShowSuccessDialog(false);
         }, 3000);
       } else {
-        alert('Failed to register.');
+        alert("Failed to register.");
       }
     });
   };
@@ -82,18 +90,17 @@ const Calendar = () => {
   };
 
   const openMeeting = (url) => {
-    window.open(url, '_blank');
+    window.open(url, "_blank");
   };
 
   // Function to generate random gradient styles
   const getRandomGradient = () => {
     const colors = [
-      'from-blue-400 to-blue-600',
-      'from-red-400 to-red-600',
-      'from-yellow-400 to-yellow-600',
-      'from-purple-400 to-purple-600',
-      'from-green-400 to-green-600',
-      'from-pink-400 to-pink-600',
+      "bg-red-100",
+      "bg-green-100",
+      "bg-blue-100",
+      "bg-yellow-100",
+      "bg-gray-100",
     ];
     return colors[Math.floor(Math.random() * colors.length)];
   };
@@ -104,38 +111,68 @@ const Calendar = () => {
       <div className="p-4 bg-white shadow-md w-4/5 rounded-lg">
         {/* Month navigation */}
         <div className="flex justify-between items-center mb-4">
-          <button onClick={() => handleMonthChange(-1)} className="p-2 bg-gray-300 rounded">Previous</button>
+          <button
+            onClick={() => handleMonthChange(-1)}
+            className="py-2 px-4 bg-blue-500 rounded text-white"
+          >
+            Previous
+          </button>
           <h2 className="text-2xl font-bold text-center">
-            {currentDate.toLocaleString('default', { month: 'long' })} {currentDate.getFullYear()}
+            {currentDate.toLocaleString("default", { month: "long" })}{" "}
+            {currentDate.getFullYear()}
           </h2>
-          <button onClick={() => handleMonthChange(1)} className="p-2 bg-gray-300 rounded">Next</button>
+          <button
+            onClick={() => handleMonthChange(1)}
+            className="py-2 px-4 bg-blue-500 rounded text-white"
+          >
+            Next
+          </button>
         </div>
 
         {/* Days of the Week */}
         <div className="grid grid-cols-7 gap-2 mb-2 text-center font-bold">
-          {['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'].map((day) => (
-            <div key={day} className="p-2">{day}</div>
+          {[
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+          ].map((day) => (
+            <div key={day} className="p-2">
+              {day}
+            </div>
           ))}
         </div>
 
         {/* Calendar Dates */}
         <div className="grid grid-cols-7 gap-2">
           {daysInMonth.map((day, index) => {
-            const eventForDay = day && events.find(
-              (event) => new Date(event.date).toDateString() === day.toDateString()
-            );
+            const eventForDay =
+              day &&
+              events.find(
+                (event) =>
+                  new Date(event.date).toDateString() === day.toDateString()
+              );
 
             return (
               <div
                 key={index}
-                className={`p-4 border rounded-md aspect-square relative ${eventForDay ? `bg-gradient-to-r ${getRandomGradient()} text-white cursor-pointer` : ''}`}
+                className={`p-4 border rounded-md aspect-square relative ${
+                  eventForDay
+                    ? `bg-gradient-to-r ${getRandomGradient()} text-gray-500  cursor-pointer`
+                    : ""
+                }`}
                 onClick={() => day && eventForDay && handleClick(eventForDay)}
               >
                 {day && (
                   <>
-                    <p className="absolute top-2 left-2 font-bold">{day.getDate()}</p>
+                    <p className="absolute top-2 left-2 text-gray-500 text-xs ">
+                      {day.getDate()}
+                    </p>
                     {eventForDay && (
-                      <p className="absolute inset-0 flex justify-center items-center text-lg font-semibold text-center">
+                      <p className="absolute inset-0 flex justify-center items-center text-md  text-gray-600  text-center">
                         {eventForDay.name}
                       </p>
                     )}
@@ -153,16 +190,22 @@ const Calendar = () => {
           <div className="flex flex-col justify-between h-full">
             <div>
               <h2 className="text-lg font-bold mb-2">
-                {new Date(selectedEvent.date).toLocaleDateString('default', { month: 'long', day: 'numeric', weekday: 'long' })}
+                {new Date(selectedEvent.date).toLocaleDateString("default", {
+                  month: "long",
+                  day: "numeric",
+                  weekday: "long",
+                })}
               </h2>
               <h3 className="text-xl font-bold mb-2">{selectedEvent.name}</h3>
-              
+
               {selectedEvent.imageUrl && (
-                <img
+                <Image
                   src={`http://localhost:4000/${selectedEvent.imageUrl}`}
                   alt={selectedEvent.name}
                   className="my-4 w-full object-cover rounded-md"
-                  style={{ aspectRatio: '3 / 2' }}
+                  layout="responsive"
+                  width={600}
+                  height={400}
                 />
               )}
 
@@ -171,10 +214,15 @@ const Calendar = () => {
               <p className="font-bold mt-4">Description:</p>
               <p className="text-justify">{selectedEvent.description}</p>
               <p className="font-bold mt-4">Participations:</p>
-              <p className="text-justify">{selectedEvent.participations.length}</p>
+              <p className="text-justify">
+                {selectedEvent.participations.length}
+              </p>
 
               {isPastDate(selectedEvent.date) ? (
-                <button className="mt-4 p-2 bg-gray-300 text-white rounded cursor-not-allowed" disabled>
+                <button
+                  className="mt-4 p-2 bg-gray-300 text-white rounded cursor-not-allowed"
+                  disabled
+                >
                   Event Passed
                 </button>
               ) : selectedEvent.participations.includes(user._id) ? (
@@ -186,7 +234,10 @@ const Calendar = () => {
                     Join Now
                   </button>
                 ) : (
-                  <button className="mt-4 p-2 bg-gray-300 text-white rounded cursor-not-allowed" disabled>
+                  <button
+                    className="mt-4 p-2 bg-gray-300 text-white rounded cursor-not-allowed"
+                    disabled
+                  >
                     Already Participated
                   </button>
                 )
@@ -239,9 +290,9 @@ const Calendar = () => {
               <button
                 className="p-2 bg-blue-500 text-white rounded"
                 onClick={() => {
-    setSelectedEvent(null); // Reset selectedEvent to null
-    location.reload(); // Reload the page
-  }}
+                  setSelectedEvent(null); // Reset selectedEvent to null
+                  location.reload(); // Reload the page
+                }}
               >
                 OK
               </button>
