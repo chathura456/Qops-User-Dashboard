@@ -23,6 +23,7 @@ export const AuthProvider = ({ children }) => {
     // Save the token and user data in cookies
     Cookies.set('token', token, { expires: 7 }); // Token expires in 7 days
     Cookies.set('user', JSON.stringify(userData), { expires: 7 });
+    console.log(userData);
     setUser(userData);
   };
 

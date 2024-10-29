@@ -136,23 +136,19 @@ const Navbar = () => {
           </a>
         </div>
         {/* Right Side (Log In / Sign Up) */}
-        <div className="w-auto flex items-center gap-4">
-          <div>
-            <Link
-              href="../../../login"
-              className="text-gray-700 hover:text-black font-semibold"
-            >
-              Log In
-            </Link>
-          </div>
-          <div>
-            <a
-              href="#"
-              className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-semibold"
-            >
-              Sign Up
-            </a>
-          </div>
+        <div className="flex items-center space-x-4">
+          <Link
+            href="../../../login"
+            className="text-gray-700 hover:text-black font-semibold"
+          >
+            Log In
+          </Link>
+          <a
+            href="../../../register"
+            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-semibold"
+          >
+            Sign Up
+          </a>
         </div>
       </div>
     </nav>

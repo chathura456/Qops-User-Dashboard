@@ -22,19 +22,19 @@ const RightBar = () => {
     {
       id: 1,
       name: 'DevOps Conference',
-      date: '01 Nov 2024',
+      date: '29 oct 2024',
       image: 'https://www.thedevopsconference.com/hs-fs/hubfs/The%20DEVOPS%20Conference/tdoc-scandinavia-2023/tdoc-copenhagen-2023/Carousel%20photos%20-%20venue/tdoc%20cph%202023.jpeg',
     },
     {
       id: 2,
       name: 'Agile Workshop',
-      date: 'Coming Soon',
+      date: '30 Oct 2024',
       image: 'https://calendar.boussiasevents.gr/wp-content/uploads/2023/03/840x560-4.jpg',
     },
     {
       id: 3,
       name: 'Hackathon',
-      date: 'Comming Soon',
+      date: '05 Oct 2024',
       image: 'https://www.kreativdistrikt.com/wp-content/uploads/2024/02/The-Art-of-Successful-Hackathon-Management.webp',
     },
   ];
@@ -49,7 +49,7 @@ const RightBar = () => {
   // Function to get 6 dates starting from the current startDate
   const getDatesForCurrentRange = () => {
     const dates = [];
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 5; i++) {
       const date = new Date(startDate);
       date.setDate(startDate.getDate() + i);
       dates.push(date);
@@ -65,7 +65,7 @@ const RightBar = () => {
       <div className="mb-6">
         <div className="flex justify-between items-center mb-2">
           <h2 className="text-lg font-bold">{startDate.toLocaleString('default', { month: 'long', year: 'numeric' })}</h2>
-          <div className="flex space-x-4">
+          <div className="flex space-x-3">
             <button onClick={() => changeDateRange(-1)} className="p-1">
               <MdArrowBack className="text-black" />
             </button>
@@ -74,7 +74,7 @@ const RightBar = () => {
             </button>
           </div>
         </div>
-        <div className="flex justify-between space-x-2">
+        <div className="flex justify-between space-x-1">
           {dates.map((date) => (
             <div
               key={date.getDate()}
@@ -82,7 +82,7 @@ const RightBar = () => {
                 date.toDateString() === new Date().toDateString() ? 'bg-blue-200' : ''
               }`}
             >
-              <div className="text-base font-bold">{date.getDate()}</div>
+              <div className="text-sm font-bold">{date.getDate()}</div>
               <div className="text-xs">{date.toLocaleString('default', { weekday: 'short' })}</div>
             </div>
           ))}
@@ -124,13 +124,20 @@ const RightBar = () => {
           <Link href="dashboard/calender" className="text-gray-500">See All</Link>
         </div>
         {events.map((event) => (
-          <div key={event.id} className="flex items-center mb-4 p-2">
-            <Image src={event.image} alt={event.name} width={100} height={70} className="mr-4 rounded" />
+          
+          <div key={event.id}>
+          <Link href="/dashboard/calender">
+          <div className='flex items-center mb-4 p-2'>
+          <Image src={event.image} alt={event.name} width={100} height={70} className="mr-4 rounded" />
             <div>
               <h3 className="font-semibold">{event.name}</h3>
-              <p>{event.date}</p>
+              <p className='text-sm'>{event.date}</p>
             </div>
           </div>
+           
+            </Link>
+          </div>
+          
         ))}
       </div>
     </div>

@@ -196,7 +196,7 @@ const Calendar = () => {
                   weekday: "long",
                 })}
               </h2>
-              <h3 className="text-xl font-bold mb-2">{selectedEvent.name}</h3>
+              <h3 className="text-lg font-bold mb-2">{selectedEvent.name}</h3>
 
               {selectedEvent.imageUrl && (
                 <Image
@@ -212,7 +212,9 @@ const Calendar = () => {
               <p className="font-bold">Time:</p>
               <p>{selectedEvent.time}</p>
               <p className="font-bold mt-4">Description:</p>
-              <p className="text-justify">{selectedEvent.description}</p>
+              <p className="text-justify text-sm">
+                {selectedEvent.description}
+              </p>
               <p className="font-bold mt-4">Participations:</p>
               <p className="text-justify">
                 {selectedEvent.participations.length}
