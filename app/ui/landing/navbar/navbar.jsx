@@ -138,7 +138,7 @@ const Navbar = () => {
         {/* Right Side (Log In / Sign Up) */}
         <div className="flex items-center space-x-4">
           <Link
-            href="/dashboard"
+            href="../../../login"
             className="text-gray-700 hover:text-black font-semibold"
           >
             Log In
