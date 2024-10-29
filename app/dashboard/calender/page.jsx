@@ -133,9 +133,9 @@ const Calendar = () => {
               >
                 {day && (
                   <>
-                    <p className="absolute top-2 left-2 font-bold">{day.getDate()}</p>
+                    <p className="absolute top-2 left-2 text-sm font-bold">{day.getDate()}</p>
                     {eventForDay && (
-                      <p className="absolute inset-0 flex justify-center items-center text-lg font-semibold text-center">
+                      <p className="absolute inset-0 flex justify-center items-center text-xs font-semibold text-center">
                         {eventForDay.name}
                       </p>
                     )}
@@ -152,10 +152,10 @@ const Calendar = () => {
         {selectedEvent ? (
           <div className="flex flex-col justify-between h-full">
             <div>
-              <h2 className="text-lg font-bold mb-2">
+              <h2 className="text-sm font-bold mb-2">
                 {new Date(selectedEvent.date).toLocaleDateString('default', { month: 'long', day: 'numeric', weekday: 'long' })}
               </h2>
-              <h3 className="text-xl font-bold mb-2">{selectedEvent.name}</h3>
+              <h3 className="text-lg font-bold mb-2">{selectedEvent.name}</h3>
               
               {selectedEvent.imageUrl && (
                 <img
@@ -169,7 +169,7 @@ const Calendar = () => {
               <p className="font-bold">Time:</p>
               <p>{selectedEvent.time}</p>
               <p className="font-bold mt-4">Description:</p>
-              <p className="text-justify">{selectedEvent.description}</p>
+              <p className="text-justify text-sm">{selectedEvent.description}</p>
               <p className="font-bold mt-4">Participations:</p>
               <p className="text-justify">{selectedEvent.participations.length}</p>
 

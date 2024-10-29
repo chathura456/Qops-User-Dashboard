@@ -81,7 +81,7 @@ const Navbar = () => {
         {/* Right Side (Log In / Sign Up) */}
         <div className="flex items-center space-x-4">
           <Link href="../../../login" className="text-gray-700 hover:text-black font-semibold">Log In</Link>
-          <a href="#" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-semibold">Sign Up</a>
+          <a href="../../../register" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-semibold">Sign Up</a>
         </div>
       </div>
     </nav>
